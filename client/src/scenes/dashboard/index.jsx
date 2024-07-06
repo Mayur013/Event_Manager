@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardContent, Typography, CardMedia, Grid, TextField,  Button } from '@mui/material';
+import { Box, Card, CardContent, Typography, CardMedia, Grid, TextField, Button } from '@mui/material';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
@@ -96,35 +96,43 @@ const Dashboard = () => {
         </Grid>
       </Box>
       <Grid container spacing={3}>
-        {filteredEvents.map((event) => (
-          <Grid item xs={12} sm={6} md={4} key={event.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="140"
-                image={`data:image/jpeg;base64,${event.banner_image}`}
-                alt={event.event_name}
-              />
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {event.event_name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {event.location}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {event.description}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {new Date(event.start_time).toLocaleString()} - {new Date(event.end_time).toLocaleString()}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Category: {event.category}
-                </Typography>
-              </CardContent>
-            </Card>
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <Grid item xs={12} sm={6} md={4} key={event.id}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={`data:image/jpeg;base64,${event.banner_image}`}
+                  alt={event.event_name}
+                />
+                <CardContent>
+                  <Typography variant="h5" component="div">
+                    {event.event_name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {event.location}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {event.description}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {new Date(event.start_time).toLocaleString()} - {new Date(event.end_time).toLocaleString()}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Category: {event.category}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))
+        ) : (
+          <Grid item xs={12}>
+            <Typography variant="h6" component="div" color="text.secondary">
+              No events available
+            </Typography>
           </Grid>
-        ))}
+        )}
       </Grid>
     </Box>
   );
